@@ -1,11 +1,12 @@
 <section class="blogs-list">
-  <h1 class="title">Blogs</h1>
+  <h1 class="title" [ngStyle]="titleStyle" title="blogs">Blogs</h1>
+  <input type="color" [(ngModel)]="titleStyle.color">
   <div class="blogs">
     <p *ngIf="blogs.length === 0; else blogList">No blogs available</p>
     <ng-template #blogList>
-      <div class="blog" *ngFor="let blog of blogs">
-        <h3 class="blog__title">{{ blog.title }}</h3>
-        <p class="blog__description">{{ blog.description }}</p>
+      <div class="blog" *ngFor="let blog of blogs" [ngClass]="{'blog--new': blog.isNew}">
+        <h3 class="blog__title" [ngClass]="{'mango-class fruit-class': fruit === 'mango', 'summer-fruit': false}" [title]="blog.title" [hidden]="!blog.title" [attr.aria-label]="blog.title">{{ blog.title }}</h3>
+        <p class="blog__description" [attr.title]="blog.description">{{ blog.description }}</p>
       </div>
     </ng-template>
   </div>
