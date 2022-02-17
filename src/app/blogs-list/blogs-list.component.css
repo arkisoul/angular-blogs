@@ -38,6 +38,20 @@
 .blog__description {
     font-size: 1rem;
     text-align: justify;
+    margin-bottom: 0.8em;
+}
+.blog__metadata {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.blog__author {
+    font-size: 0.75rem;
+    color: #999;
+}
+.blog__publishedat {
+    font-size: 0.7rem;
+    color: #888;
 }
 @media (min-width: 480px) {
     .blogs {
