@@ -1,9 +1,22 @@
 <section class="blogs-list">
-    <h1 class="title">Blogs</h1>
-    <div class="blogs">
-        <div class="blog" *ngFor="let blog of blogs">
-            <h3 class="blog__title">{{ blog.title }}</h3>
-            <p class="blog__description">{{ blog.description }}</p>
-        </div>
-    </div>
+  <h1 class="title">Blogs</h1>
+  <div class="blogs">
+    <p *ngIf="blogs.length === 0; else blogList">No blogs available</p>
+    <ng-template #blogList>
+      <div class="blog" *ngFor="let blog of blogs">
+        <h3 class="blog__title">{{ blog.title }}</h3>
+        <p class="blog__description">{{ blog.description }}</p>
+      </div>
+    </ng-template>
+  </div>
+  <div [ngSwitch]="fruit">
+    <ng-container *ngSwitchCase="fruitMango">
+      <div>
+        <h1>{{ fruit }} is a summer fruit.</h1>
+      </div>
+    </ng-container>
+    <p *ngSwitchCase="'grape'">{{ fruit }} is a spring fruit.</p>
+    <p *ngSwitchCase="'banana'">{{ fruit }} is a all season fruit.</p>
+    <p *ngSwitchDefault>{{ fruit }} is not known.</p>
+  </div>
 </section>

@@ -53,8 +53,12 @@ export class BlogsListComponent implements OnInit {
       description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
     }
   ];
+  fruit: string = 'mango';
+  fruitMango: string = 'mango';
   
-  constructor() {}
+  constructor() {
+    // this.blogs = [];
+  }
 
   ngOnInit(): void {}
 }
