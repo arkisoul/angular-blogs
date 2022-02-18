@@ -7,114 +7,134 @@ import { IBlog } from '../interfaces/blog.interface';
   templateUrl: './blogs-list.component.html',
   styleUrls: ['./blogs-list.component.css'],
 })
-export class BlogsListComponent implements OnInit, OnDestroy, AfterViewChecked, AfterViewInit {
+export class BlogsListComponent
+  implements OnInit, OnDestroy, AfterViewChecked, AfterViewInit
+{
   @Input('appname') appname: string;
 
   blogs: IBlog[] = [
     {
+      id: 1,
       title: 'Blog 1',
       description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
       isNew: true,
       publishedAt: new Date(),
       modifiedAt: new Date(),
-      author: 'JOHN DOE'
+      author: 'JOHN DOE',
     },
     {
+      id: 2,
       title: 'Blog 2',
       description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
       isNew: true,
       publishedAt: new Date(),
       modifiedAt: new Date(),
-      author: 'Jane doe'
+      author: 'Jane doe',
     },
     {
+      id: 3,
       title: 'Blog 3',
       description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
       isNew: false,
       publishedAt: new Date(),
       modifiedAt: new Date(),
-      author: 'John doe'
+      author: 'John doe',
     },
     {
+      id: 4,
       title: 'Blog 4',
       description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
       isNew: false,
       publishedAt: new Date(),
       modifiedAt: new Date(),
-      author: 'jonAs Doe'
+      author: 'jonAs Doe',
     },
     {
+      id: 5,
       title: 'Blog 5',
       description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
       isNew: false,
       publishedAt: new Date(),
       modifiedAt: new Date(),
-      author: 'John Smith'
+      author: 'John Smith',
     },
     {
+      id: 6,
       title: 'Blog 6',
       description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
       isNew: true,
       publishedAt: new Date(),
       modifiedAt: new Date(),
-      author: 'John Doe'
+      author: 'John Doe',
     },
     {
+      id: 7,
       title: 'Blog 7',
       description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
       isNew: false,
       publishedAt: new Date(),
       modifiedAt: new Date(),
-      author: 'John Doe'
+      author: 'John Doe',
     },
     {
+      id: 8,
       title: 'Blog 8',
       description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
       isNew: false,
       publishedAt: new Date(),
       modifiedAt: new Date(),
-      author: 'Sean Pean'
+      author: 'Sean Pean',
     },
     {
+      id: 9,
       title: 'Blog 9',
       description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
       isNew: false,
       publishedAt: new Date(),
       modifiedAt: new Date(),
-      author: 'Damian'
+      author: 'Damian',
     },
     {
+      id: 10,
       title: 'Blog 10',
       description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
       isNew: false,
       publishedAt: new Date(),
       modifiedAt: new Date(),
-      author: 'Daniel'
-    }
+      author: 'Daniel',
+    },
   ];
   fruit: string = 'mango';
   fruitMango: string = 'mango';
   titleColor: string = '#ff0000';
   fontSize: string = '20px';
-  titleStyle = { 'color': this.titleColor, 'font-size.px': 40, 'text-decoration': 'underline' };
-  
+  titleStyle = {
+    color: this.titleColor,
+    'font-size.px': 40,
+    'text-decoration': 'underline',
+  };
+
   constructor() {
-    console.log("Blog list constructor");
+    console.log('Blog list constructor');
   }
 
   ngOnInit(): void {
     console.log('Blog list ngOnInit');
   }
-  
+
   ngOnDestroy(): void {
     console.log('Blog list ngOnDestroy');
   }
-  
+
   ngAfterViewChecked(): void {
     console.log('Blog list ngAfterViewChecked');
   }
-  
+
   ngAfterViewInit(): void {
     console.log('Blog list ngAfterViewInit');
+  }
+
+  onDeleteBlog(blogId: number) {
+    this.blogs = this.blogs.filter(blog => blog.id !== blogId);
   }
 }

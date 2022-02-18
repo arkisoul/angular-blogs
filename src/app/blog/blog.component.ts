@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 import { IBlog } from '../interfaces/blog.interface';
 
@@ -12,5 +12,11 @@ export class BlogComponent {
   @Input() public blogLength: number;
   @Input('app') public appname: string;
 
+  @Output('delete') public delete: EventEmitter<number> = new EventEmitter();
+
   constructor() {}
+
+  deleteBlog() {
+    this.delete.emit(this.blog.id)
+  }
 }

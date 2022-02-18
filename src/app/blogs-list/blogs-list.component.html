@@ -4,7 +4,7 @@
   <div class="blogs">
     <p *ngIf="blogs.length === 0; else blogList">No blogs available</p>
     <ng-template #blogList>
-      <app-blog *ngFor="let blog of blogs" [blogData]="blog" [blogLength]="blogs.length" [app]="appname"></app-blog>
+      <app-blog *ngFor="let blog of blogs" [blogData]="blog" [blogLength]="blogs.length" [app]="appname" (delete)="onDeleteBlog($event)"></app-blog>
     </ng-template>
   </div>
   <!-- <div [ngSwitch]="fruit">

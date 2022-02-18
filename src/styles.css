@@ -25,3 +25,7 @@ a {
     margin: 0 auto;
     padding: 0 2rem;
 }
+i.fas, i.far, i.fa
+i.fas::before, i.far::before, i.fa::before {
+    font-family: "Font Awesome 5 Pro";
+}
