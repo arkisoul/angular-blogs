@@ -6,3 +6,9 @@
 3. Use ngStyle to apply some dynamic styles to item.
 4. Use ngClass to apply dynamic styles to item whose isCompleted value is true.
 5. Use attribute binding to add title, aria-label, aria-describedby attributes to the item element. Value should be equal to item title.
+
+## Part II
+1. Split the list component and item component into two.
+2. Enable a user to delete a todo item.
+3. Enable a user to toggle the completion status of the todo item.
+4. Create a template driven form with title field. Create the business logic to add it to the existing todo list.

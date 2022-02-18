@@ -1,4 +1,5 @@
-import { AfterViewChecked, AfterViewInit, Component, OnDestroy, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 
 import { IBlog } from '../interfaces/blog.interface';
 
@@ -7,9 +8,7 @@ import { IBlog } from '../interfaces/blog.interface';
   templateUrl: './blogs-list.component.html',
   styleUrls: ['./blogs-list.component.css'],
 })
-export class BlogsListComponent
-  implements OnInit, OnDestroy, AfterViewChecked, AfterViewInit
-{
+export class BlogsListComponent {
   @Input('appname') appname: string;
 
   blogs: IBlog[] = [
@@ -114,7 +113,23 @@ export class BlogsListComponent
     'text-decoration': 'underline',
   };
 
-  constructor() {
+  // template driven blog add form
+  blogTitle: string = '';
+  blogAuthor: string;
+  blogDesc: string;
+
+  blog = {
+    title: '',
+    author: '',
+    desc: ''
+  }
+
+  // reactive blog add form
+  title: FormControl = new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(30)]);
+  author: FormControl = new FormControl('');
+  desc: FormControl = new FormControl('');
+
+  /* constructor() {
     console.log('Blog list constructor');
   }
 
@@ -132,9 +147,17 @@ export class BlogsListComponent
 
   ngAfterViewInit(): void {
     console.log('Blog list ngAfterViewInit');
-  }
+  } */
 
   onDeleteBlog(blogId: number) {
-    this.blogs = this.blogs.filter(blog => blog.id !== blogId);
+    this.blogs = this.blogs.filter((blog) => blog.id !== blogId);
+  }
+
+  addBlog() {
+    console.log(this.blogAuthor, this.blogTitle, this.blogDesc);
+  }
+
+  addBlogReactive() {
+    console.log(this.author, this.title, this.desc);
   }
 }

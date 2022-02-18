@@ -27,3 +27,39 @@
         grid-template-columns: repeat(4, 1fr);
     }
 }
+
+/* Blog form */
+.blog-add {
+    padding: 1em 2em;
+    background-color: #f5f9f5;
+    margin: 1em 0;
+}
+.blog-form {
+    display: grid;
+    gap: 1em;
+}
+.form-field {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+}
+.form-label {
+    font-size: 0.8rem;
+    flex: 0 0 150px;
+}
+.form-input {
+    padding: 0.5em 1em;
+    width: 100%;
+    font-size: 1rem;
+}
+.self-center {
+    justify-self: center;
+}
+.btn-submit {
+    all: unset;
+    padding: 0.75em 1.5em;
+    background-color: white;
+    color: black;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+}

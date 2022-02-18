@@ -4,7 +4,13 @@
   <div class="blogs">
     <p *ngIf="blogs.length === 0; else blogList">No blogs available</p>
     <ng-template #blogList>
-      <app-blog *ngFor="let blog of blogs" [blogData]="blog" [blogLength]="blogs.length" [app]="appname" (delete)="onDeleteBlog($event)"></app-blog>
+      <app-blog
+        *ngFor="let blog of blogs"
+        [blogData]="blog"
+        [blogLength]="blogs.length"
+        [app]="appname"
+        (delete)="onDeleteBlog($event)"
+      ></app-blog>
     </ng-template>
   </div>
   <!-- <div [ngSwitch]="fruit">
@@ -17,4 +23,91 @@
     <p *ngSwitchCase="'banana'">{{ fruit }} is a all season fruit.</p>
     <p *ngSwitchDefault>{{ fruit }} is not known.</p>
   </div> -->
+  <div class="blog-add">
+    <form class="blog-form" (ngSubmit)="addBlog()">
+      <div class="form-field">
+        <label for="title" class="form-label">Enter a title</label
+        ><div>
+          <input
+            type="text"
+            name="title"
+            id="title"
+            placeholder="Blog title here"
+            class="form-input"
+            [(ngModel)]="blogTitle"
+          />
+          <small *ngIf="blogTitle.trim().length === 0">Title is required</small>
+        </div>
+      </div>
+      <div class="form-field">
+        <label for="author" class="form-label">Enter your name</label
+        ><input
+          type="text"
+          name="author"
+          id="author"
+          placeholder="Blog author name here"
+          class="form-input"
+          [(ngModel)]="blogAuthor"
+        />
+      </div>
+      <div class="form-field">
+        <label for="description" class="form-label">Enter description</label
+        ><textarea
+          name="description"
+          id="description"
+          cols="30"
+          rows="5"
+          class="form-input"
+          [(ngModel)]="blogDesc"
+        ></textarea>
+      </div>
+      <div class="form-field self-center">
+        <button type="submit" class="btn btn-submit">Submit</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="blog-add">
+    <form class="blog-form" (ngSubmit)="addBlogReactive()">
+      <div class="form-field">
+        <label for="title" class="form-label">Enter a title</label
+        ><div>
+          <input
+            type="text"
+            name="title"
+            id="title"
+            placeholder="Blog title here"
+            class="form-input"
+            [formControl]="title"
+          />
+          <small *ngIf="!title.pristine && title.invalid">Title is required</small>
+        </div>
+      </div>
+      <div class="form-field">
+        <label for="author" class="form-label">Enter your name</label
+        ><input
+          type="text"
+          name="author"
+          id="author"
+          placeholder="Blog author name here"
+          class="form-input"
+          [formControl]="author"
+        />
+      </div>
+      <div class="form-field">
+        <label for="description" class="form-label">Enter description</label
+        ><textarea
+          name="description"
+          id="description"
+          cols="30"
+          rows="5"
+          class="form-input"
+          [formControl]="desc"
+        ></textarea>
+      </div>
+      <div class="form-field self-center">
+        <button type="submit" class="btn btn-submit">Submit</button>
+      </div>
+    </form>
+  </div>
 </section>
