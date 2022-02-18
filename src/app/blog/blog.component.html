@@ -1,0 +1,25 @@
+<div
+  class="blog"
+  [ngClass]="{ 'blog--new': blog.isNew }"
+>
+  <h3
+    class="blog__title"
+    [title]="blog.title"
+    [hidden]="!blog.title"
+    [attr.aria-label]="blog.title"
+  >
+    {{ blog.title }} | {{ blogLength }}
+  </h3>
+  <p class="blog__description" [attr.title]="blog.description">
+    {{ blog.description }}
+  </p>
+  <div class="blog__metadata">
+    <span class="blog__publishedat">{{
+      blog.publishedAt | date: "dd-MMM-yyyy"
+    }}</span>
+    <span class="blog__author">{{ blog.author | titlecase }}</span>
+  </div>
+  <div>
+    <span class="blog__author">{{ appname }}</span>
+  </div>
+</div>

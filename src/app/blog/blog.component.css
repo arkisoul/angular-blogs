@@ -1,0 +1,41 @@
+.blog {
+    padding: 1em 1em;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.25);
+    border-radius: 0.5em 0 0.5em 0;
+}
+.blog--new {
+    position: relative;
+}
+.blog--new::after {
+    content: 'New';
+    display: inline-block;
+    position: absolute;
+    width: min-content;
+    background-color: red;
+    color: white;
+    padding: 4px;
+    top: 4px;
+    right: 4px;
+}
+.blog__title {
+    font-size: 2rem;
+    margin-bottom: 0.5em;
+}
+.blog__description {
+    font-size: 1rem;
+    text-align: justify;
+    margin-bottom: 0.8em;
+}
+.blog__metadata {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.blog__author {
+    font-size: 0.75rem;
+    color: #999;
+}
+.blog__publishedat {
+    font-size: 0.7rem;
+    color: #888;
+}

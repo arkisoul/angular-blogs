@@ -1,0 +1,20 @@
+<section class="blogs-list">
+  <h1 class="title" title="blogs" [ngStyle]="titleStyle">{{ appname }}</h1>
+  <!-- <input type="color" [(ngModel)]="titleColor"> -->
+  <div class="blogs">
+    <p *ngIf="blogs.length === 0; else blogList">No blogs available</p>
+    <ng-template #blogList>
+      <app-blog *ngFor="let blog of blogs" [blogData]="blog" [blogLength]="blogs.length" [app]="appname"></app-blog>
+    </ng-template>
+  </div>
+  <!-- <div [ngSwitch]="fruit">
+    <ng-container *ngSwitchCase="fruitMango">
+      <div>
+        <h1>{{ fruit }} is a summer fruit.</h1>
+      </div>
+    </ng-container>
+    <p *ngSwitchCase="'grape'">{{ fruit }} is a spring fruit.</p>
+    <p *ngSwitchCase="'banana'">{{ fruit }} is a all season fruit.</p>
+    <p *ngSwitchDefault>{{ fruit }} is not known.</p>
+  </div> -->
+</section>

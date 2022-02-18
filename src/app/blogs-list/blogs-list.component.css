@@ -1,0 +1,29 @@
+.blogs-list {
+    padding: 3em 2em;
+}
+.title {
+    font-size: 4rem;
+    margin-bottom: 0.5em;
+    text-align: center;
+}
+.blogs {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    gap: 1em;
+}
+@media (min-width: 480px) {
+    .blogs {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media (min-width: 768px) {
+    .blogs {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+@media (min-width: 1024px) {
+    .blogs {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
