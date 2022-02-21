@@ -29,3 +29,8 @@ i.fas, i.far, i.fa
 i.fas::before, i.far::before, i.fa::before {
     font-family: "Font Awesome 5 Pro";
 }
+.form-error {
+    color: red;
+    font-size: 0.75rem;
+    margin: 1em 0;
+}
