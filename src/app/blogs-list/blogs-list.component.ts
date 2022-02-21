@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl, Validators, FormGroup } from '@angular/forms';
 
 import { IBlog } from '../interfaces/blog.interface';
 
@@ -11,98 +11,7 @@ import { IBlog } from '../interfaces/blog.interface';
 export class BlogsListComponent {
   @Input('appname') appname: string;
 
-  blogs: IBlog[] = [
-    {
-      id: 1,
-      title: 'Blog 1',
-      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-      isNew: true,
-      publishedAt: new Date(),
-      modifiedAt: new Date(),
-      author: 'JOHN DOE',
-    },
-    {
-      id: 2,
-      title: 'Blog 2',
-      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-      isNew: true,
-      publishedAt: new Date(),
-      modifiedAt: new Date(),
-      author: 'Jane doe',
-    },
-    {
-      id: 3,
-      title: 'Blog 3',
-      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-      isNew: false,
-      publishedAt: new Date(),
-      modifiedAt: new Date(),
-      author: 'John doe',
-    },
-    {
-      id: 4,
-      title: 'Blog 4',
-      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-      isNew: false,
-      publishedAt: new Date(),
-      modifiedAt: new Date(),
-      author: 'jonAs Doe',
-    },
-    {
-      id: 5,
-      title: 'Blog 5',
-      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-      isNew: false,
-      publishedAt: new Date(),
-      modifiedAt: new Date(),
-      author: 'John Smith',
-    },
-    {
-      id: 6,
-      title: 'Blog 6',
-      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-      isNew: true,
-      publishedAt: new Date(),
-      modifiedAt: new Date(),
-      author: 'John Doe',
-    },
-    {
-      id: 7,
-      title: 'Blog 7',
-      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-      isNew: false,
-      publishedAt: new Date(),
-      modifiedAt: new Date(),
-      author: 'John Doe',
-    },
-    {
-      id: 8,
-      title: 'Blog 8',
-      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-      isNew: false,
-      publishedAt: new Date(),
-      modifiedAt: new Date(),
-      author: 'Sean Pean',
-    },
-    {
-      id: 9,
-      title: 'Blog 9',
-      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-      isNew: false,
-      publishedAt: new Date(),
-      modifiedAt: new Date(),
-      author: 'Damian',
-    },
-    {
-      id: 10,
-      title: 'Blog 10',
-      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-      isNew: false,
-      publishedAt: new Date(),
-      modifiedAt: new Date(),
-      author: 'Daniel',
-    },
-  ];
+  blogs: IBlog[] = [];
   fruit: string = 'mango';
   fruitMango: string = 'mango';
   titleColor: string = '#ff0000';
@@ -121,18 +30,45 @@ export class BlogsListComponent {
   blog = {
     title: '',
     author: '',
-    desc: ''
-  }
+    desc: '',
+  };
 
   // reactive blog add form
-  title: FormControl = new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(30)]);
-  author: FormControl = new FormControl('');
-  desc: FormControl = new FormControl('');
+  reactiveBlog = new FormGroup({
+    title: new FormControl('', [
+      Validators.required,
+      Validators.minLength(10),
+      Validators.maxLength(30),
+    ]),
+    author: new FormControl('', Validators.required),
+    desc: new FormControl('', Validators.required)
+  });
+  // reactiveBlog = {
+  //   title: new FormControl('', [
+  //     Validators.required,
+  //     Validators.minLength(10),
+  //     Validators.maxLength(30),
+  //   ]),
+  //   author: new FormControl('', Validators.required),
+  //   desc: new FormControl('', Validators.required)
+  // };
 
-  /* constructor() {
-    console.log('Blog list constructor');
+  constructor() {
+    const authors = ['John Doe', 'jane doe', 'john smith'];
+    const now = new Date();
+    for (let index = 1; index <= 10; index++) {
+      this.blogs.push({
+        id: index,
+        title: `Blog title ${index}`,
+        description: 'lorem ipsum decor is dummy text.',
+        isNew: index % 2 === 0,
+        author: authors[index % 3],
+        publishedAt: now,
+        modifiedAt: now,
+      });
+    }
   }
-
+  /* 
   ngOnInit(): void {
     console.log('Blog list ngOnInit');
   }
@@ -158,6 +94,6 @@ export class BlogsListComponent {
   }
 
   addBlogReactive() {
-    console.log(this.author, this.title, this.desc);
+    console.log(this.reactiveBlog.value);
   }
 }

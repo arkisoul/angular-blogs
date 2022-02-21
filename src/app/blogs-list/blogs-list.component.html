@@ -68,7 +68,7 @@
   </div>
 
   <div class="blog-add">
-    <form class="blog-form" (ngSubmit)="addBlogReactive()">
+    <form class="blog-form" (ngSubmit)="addBlogReactive()" [formGroup]="reactiveBlog">
       <div class="form-field">
         <label for="title" class="form-label">Enter a title</label
         ><div>
@@ -78,9 +78,9 @@
             id="title"
             placeholder="Blog title here"
             class="form-input"
-            [formControl]="title"
+            formControlName="title"
           />
-          <small *ngIf="!title.pristine && title.invalid">Title is required</small>
+          <small class="form-error" *ngIf="!reactiveBlog.controls.title.pristine && reactiveBlog.controls.title.invalid">Title is required</small>
         </div>
       </div>
       <div class="form-field">
@@ -91,8 +91,9 @@
           id="author"
           placeholder="Blog author name here"
           class="form-input"
-          [formControl]="author"
+          formControlName="author"
         />
+        <small class="form-error" *ngIf="!reactiveBlog.controls.author.pristine && reactiveBlog.controls.author.invalid">Author is required</small>
       </div>
       <div class="form-field">
         <label for="description" class="form-label">Enter description</label
@@ -102,11 +103,12 @@
           cols="30"
           rows="5"
           class="form-input"
-          [formControl]="desc"
+          formControlName="desc"
         ></textarea>
+        <small class="form-error" *ngIf="!reactiveBlog.controls.desc.pristine && reactiveBlog.controls.desc.invalid">Description is required</small>
       </div>
       <div class="form-field self-center">
-        <button type="submit" class="btn btn-submit">Submit</button>
+        <button type="submit" class="btn btn-submit" [disabled]="reactiveBlog.invalid">Submit</button>
       </div>
     </form>
   </div>
