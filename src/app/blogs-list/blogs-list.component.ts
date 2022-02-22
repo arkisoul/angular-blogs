@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
 
 import { IBlog } from '../interfaces/blog.interface';
+import { AppService } from '../app.service';
 
 @Component({
   selector: 'app-blogs-list',
@@ -41,7 +42,7 @@ export class BlogsListComponent {
       Validators.maxLength(30),
     ]),
     author: new FormControl('', Validators.required),
-    desc: new FormControl('', Validators.required)
+    desc: new FormControl('', Validators.required),
   });
   // reactiveBlog = {
   //   title: new FormControl('', [
@@ -53,7 +54,8 @@ export class BlogsListComponent {
   //   desc: new FormControl('', Validators.required)
   // };
 
-  constructor() {
+  constructor(private appService: AppService) {
+    this.appService.substract(20, 20);
     const authors = ['John Doe', 'jane doe', 'john smith'];
     const now = new Date();
     for (let index = 1; index <= 10; index++) {
@@ -95,5 +97,10 @@ export class BlogsListComponent {
 
   addBlogReactive() {
     console.log(this.reactiveBlog.value);
+  }
+
+  getOperations() {
+    const operations = this.appService.getOperations();
+    console.log(operations);
   }
 }

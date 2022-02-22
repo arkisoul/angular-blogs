@@ -1,5 +1,7 @@
 import { Component, VERSION } from '@angular/core';
 
+import { AppService } from './app.service';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -11,10 +13,11 @@ export class AppComponent {
   flag = false;
   inputField: string = 'test';
 
-  /* constructor() {
-    console.log('AppComp Constructor');
+  constructor(private appService: AppService) {
+    this.appService.add(10, 20);
+    this.appService.substract(30, 20);
   }
-
+  /*
   ngOnInit(): void {
     console.log('AppComp ngOnInit');
   }
@@ -34,5 +37,10 @@ export class AppComponent {
   handleSubmit(value: string) {
     console.log('clicked me.', value);
     this.flag = !this.flag;
+  }
+
+  getOperations() {
+    const operations = this.appService.getOperations();
+    console.log('AppComp ', operations);
   }
 }
