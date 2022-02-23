@@ -1,11 +1,18 @@
 <main class="main-content">
   <div class="container">
+    <div>
+      <ul>
+        <li><a [routerLink]="'/'">Home</a></li>
+        <li><a [routerLink]="'/blogs'">Blogs</a></li>
+      </ul>
+    </div>
     <button (click)="getOperations()">Get Operations</button>
     <!-- <h1>{{ title }} app is running!</h1>
     <h3 *ngIf="flag">{{ subtitle }}</h3>
     <div class="big-font">{{ flag ? "Flag is true" : "Flag is false" }}</div>
     <input type="text" [name]="inputField" placeholder="Write some text" [(ngModel)]="title" >
     <div><button (click)="handleSubmit(title)">Toggle Flag!</button></div> -->
-    <app-blogs-list [appname]="title"></app-blogs-list>
+    <!-- <app-blogs-list [appname]="title"></app-blogs-list> -->
+    <router-outlet></router-outlet>
   </div>
 </main>

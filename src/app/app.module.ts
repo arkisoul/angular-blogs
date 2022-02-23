@@ -9,7 +9,7 @@ import { BlogComponent } from './blog/blog.component';
 
 @NgModule({
   declarations: [AppComponent, BlogsListComponent, BlogComponent],
-  imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
+  imports: [BrowserModule, FormsModule, ReactiveFormsModule, AppRoutingModule],
   providers: [],
   bootstrap: [AppComponent],
 })
