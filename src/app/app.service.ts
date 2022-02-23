@@ -20,6 +20,6 @@ export class AppService {
   }
 
   getOperations() {
-    return this.operations;
+    return [...this.operations];
   }
 }

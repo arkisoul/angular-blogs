@@ -12,10 +12,12 @@ export class AppComponent {
   subtitle = 'Learning Angular ' + VERSION.major;
   flag = false;
   inputField: string = 'test';
+  ops: string[];
 
   constructor(private appService: AppService) {
     this.appService.add(10, 20);
     this.appService.substract(30, 20);
+    this.ops = this.appService.getOperations();
   }
   /*
   ngOnInit(): void {

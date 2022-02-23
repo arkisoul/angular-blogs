@@ -10,6 +10,7 @@
         [blogLength]="blogs.length"
         [app]="appname"
         (delete)="onDeleteBlog($event)"
+        (click)="showBlogDetails(blog.id)"
       ></app-blog>
     </ng-template>
   </div>

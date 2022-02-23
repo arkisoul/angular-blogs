@@ -1,8 +1,10 @@
 import { Component, Input } from '@angular/core';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { IBlog } from '../interfaces/blog.interface';
 import { AppService } from '../app.service';
+import { BlogsService } from '../blogs/services/blogs.service';
 
 @Component({
   selector: 'app-blogs-list',
@@ -10,7 +12,7 @@ import { AppService } from '../app.service';
   styleUrls: ['./blogs-list.component.css'],
 })
 export class BlogsListComponent {
-  @Input('appname') appname: string;
+  appname: string = 'Blogs';
 
   blogs: IBlog[] = [];
   fruit: string = 'mango';
@@ -53,27 +55,22 @@ export class BlogsListComponent {
   //   author: new FormControl('', Validators.required),
   //   desc: new FormControl('', Validators.required)
   // };
+  ops: string[];
 
-  constructor(private appService: AppService) {
+  constructor(
+    private appService: AppService,
+    private router: Router,
+    private blogsService: BlogsService
+  ) {
     this.appService.substract(20, 20);
-    const authors = ['John Doe', 'jane doe', 'john smith'];
-    const now = new Date();
-    for (let index = 1; index <= 10; index++) {
-      this.blogs.push({
-        id: index,
-        title: `Blog title ${index}`,
-        description: 'lorem ipsum decor is dummy text.',
-        isNew: index % 2 === 0,
-        author: authors[index % 3],
-        publishedAt: now,
-        modifiedAt: now,
-      });
-    }
+    this.ops = this.appService.getOperations();
+  }
+
+  ngOnInit(): void {
+    this.blogs = this.blogsService.getAll();
   }
   /* 
-  ngOnInit(): void {
-    console.log('Blog list ngOnInit');
-  }
+  
 
   ngOnDestroy(): void {
     console.log('Blog list ngOnDestroy');
@@ -102,5 +99,9 @@ export class BlogsListComponent {
   getOperations() {
     const operations = this.appService.getOperations();
     console.log(operations);
+  }
+
+  showBlogDetails(blogId: number) {
+    this.router.navigateByUrl(`/blogs/${blogId}`);
   }
 }
