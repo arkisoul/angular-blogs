@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { IBlog } from '../../interfaces/blog.interface';
+import { IBlog } from '../interfaces/blog.interface';
 
 @Injectable({
   providedIn: 'root'

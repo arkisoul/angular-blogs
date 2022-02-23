@@ -2,9 +2,9 @@ import { Component, Input } from '@angular/core';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { IBlog } from '../interfaces/blog.interface';
-import { AppService } from '../app.service';
-import { BlogsService } from '../blogs/services/blogs.service';
+import { IBlog } from '../../interfaces/blog.interface';
+import { AppService } from '../../../app.service';
+import { BlogsService } from '../../services/blogs.service';
 
 @Component({
   selector: 'app-blogs-list',

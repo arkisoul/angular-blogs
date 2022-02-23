@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
-import { IBlog } from '../interfaces/blog.interface';
+import { IBlog } from '../../interfaces/blog.interface';
 
 @Component({
   selector: 'app-blog',

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { BlogsService } from '../blogs/services/blogs.service';
-import { IBlog } from '../interfaces/blog.interface';
+import { BlogsService } from '../../services/blogs.service';
+import { IBlog } from '../../interfaces/blog.interface';
 
 @Component({
   selector: 'app-blog-details',
@@ -21,5 +21,8 @@ export class BlogDetailsComponent implements OnInit {
       const blogId = parseInt(params.blogId);
       this.blog = this.blogsService.getBlogById(blogId);
     });
+    this.route.queryParams.subscribe((query) => {
+      console.log(query)
+    })
   }
 }
