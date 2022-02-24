@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { IBlog } from '../../interfaces/blog.interface';
 import { AppService } from '../../../app.service';
@@ -56,18 +56,34 @@ export class BlogsListComponent {
   //   desc: new FormControl('', Validators.required)
   // };
   ops: string[];
+  listOrder: string;
 
   constructor(
     private appService: AppService,
     private router: Router,
-    private blogsService: BlogsService
+    private blogsService: BlogsService,
+    private route: ActivatedRoute
   ) {
     this.appService.substract(20, 20);
     this.ops = this.appService.getOperations();
+    this.route.queryParams.subscribe((query) => {
+      this.listOrder = query.order;
+      this.sortBlogList(this.listOrder);
+    });
+    this.route.data.subscribe(data => console.log(data))
   }
 
   ngOnInit(): void {
     this.blogs = this.blogsService.getAll();
+    this.sortBlogList(this.listOrder);
+  }
+
+  sortBlogList(order: string = 'asc') {
+    this.blogs = [...this.blogs].sort((a, b) => {
+      if (a.id < b.id) return order === 'asc' ? -1 : 1;
+      if (a.id === b.id) return 0;
+      return order === 'asc' ? 1 : -1;
+    });
   }
   /* 
   
@@ -102,6 +118,8 @@ export class BlogsListComponent {
   }
 
   showBlogDetails(blogId: number) {
-    this.router.navigateByUrl(`/blogs/${blogId}`);
+    this.router.navigate([`/blogs/${blogId}`], {
+      queryParams: { sort: 'asc' },
+    });
   }
 }

@@ -6,7 +6,12 @@ import { BlogDetailsComponent } from './components/blog-details/blog-details.com
 
 const routes: Routes = [
   { path: ':blogId', component: BlogDetailsComponent },
-  { path: '', pathMatch: 'full', component: BlogsListComponent },
+  {
+    path: '',
+    pathMatch: 'full',
+    component: BlogsListComponent,
+    data: { title: 'Blog List', keywords: ['blogs', 'list', 'blog', 'tags'] },
+  },
 ];
 
 @NgModule({
