@@ -42,7 +42,7 @@ export class BlogsListComponent {
     private appService: AppService,
     private router: Router,
     private blogsService: BlogsService,
-    private route: ActivatedRoute,
+    private route: ActivatedRoute
   ) {
     this.appService.substract(20, 20);
     this.ops = this.appService.getOperations();
@@ -54,7 +54,7 @@ export class BlogsListComponent {
   }
 
   ngOnInit(): void {
-    this.blogsService.getAll().subscribe(blogs => this.blogs = blogs);
+    this.blogsService.getAll().subscribe((blogs) => (this.blogs = blogs));
     this.sortBlogList(this.listOrder);
   }
 
@@ -81,7 +81,9 @@ export class BlogsListComponent {
   } */
 
   onDeleteBlog(blogId: number) {
-    this.blogs = this.blogs.filter((blog) => blog.id !== blogId);
+    this.blogsService.delete(blogId).subscribe((res) => {
+      this.blogs = this.blogs.filter((blog) => blog.id !== blogId);
+    });
   }
 
   addBlog() {
@@ -97,5 +99,9 @@ export class BlogsListComponent {
     this.router.navigate([`/blogs/${blogId}`], {
       queryParams: { sort: 'asc' },
     });
+  }
+
+  onEditBlog(blogId: number) {
+    this.router.navigate([`/blogs/${blogId}/edit`]);
   }
 }

@@ -19,6 +19,14 @@ export class BlogsService {
       },
     });
   }
+  
+  edit(data: IBlog): Observable<IBlog> {
+    return this.http.put<IBlog>(`${this.baseUrl}/posts/${data.id}`, data, {
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      },
+    });
+  }
 
   getAll(): Observable<IBlog[]> {
     return this.http.get<IBlog[]>(`${this.baseUrl}/posts`);
@@ -26,5 +34,9 @@ export class BlogsService {
 
   getBlogById(id: number): Observable<IBlog> {
     return this.http.get<IBlog>(`${this.baseUrl}/posts/${id}`);
+  }
+
+  delete(id: number): Observable<{}> {
+    return this.http.delete(`${this.baseUrl}/posts/${id}`);
   }
 }

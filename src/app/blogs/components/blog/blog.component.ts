@@ -11,12 +11,24 @@ export class BlogComponent {
   @Input('blogData') public blog: IBlog;
   @Input() public blogLength: number;
   @Input('app') public appname: string;
+  @Input('detailPage') public detailPage: boolean;
 
-  @Output('delete') public delete: EventEmitter<number> = new EventEmitter();
+  @Output('delete')
+  public delete: EventEmitter<number> = new EventEmitter();
+  @Output('show') public show: EventEmitter<number> = new EventEmitter();
+  @Output('edit') public edit: EventEmitter<number> = new EventEmitter();
 
   constructor() {}
 
   deleteBlog() {
-    this.delete.emit(this.blog.id)
+    this.delete.emit(this.blog.id);
+  }
+
+  showDetails() {
+    this.show.emit(this.blog.id);
+  }
+
+  editBlog() {
+    this.edit.emit(this.blog.id);
   }
 }

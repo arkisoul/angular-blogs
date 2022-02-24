@@ -34,6 +34,11 @@ export class BlogAddComponent implements OnInit {
   }
 
   addNewBlog() {
+    if(this.newBlogFormGroup.invalid) {
+      alert('Invalid input values');
+      return;
+    }
+    
     this.blogsService.add(this.newBlogFormGroup.value).subscribe(blog => console.log(blog));
     this.newBlogFormGroup.reset();
   }
