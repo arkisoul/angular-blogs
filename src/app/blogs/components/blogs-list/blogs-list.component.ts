@@ -1,5 +1,4 @@
-import { Component, Input } from '@angular/core';
-import { FormControl, Validators, FormGroup } from '@angular/forms';
+import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { IBlog } from '../../interfaces/blog.interface';
@@ -36,25 +35,6 @@ export class BlogsListComponent {
     desc: '',
   };
 
-  // reactive blog add form
-  reactiveBlog = new FormGroup({
-    title: new FormControl('', [
-      Validators.required,
-      Validators.minLength(10),
-      Validators.maxLength(30),
-    ]),
-    author: new FormControl('', Validators.required),
-    desc: new FormControl('', Validators.required),
-  });
-  // reactiveBlog = {
-  //   title: new FormControl('', [
-  //     Validators.required,
-  //     Validators.minLength(10),
-  //     Validators.maxLength(30),
-  //   ]),
-  //   author: new FormControl('', Validators.required),
-  //   desc: new FormControl('', Validators.required)
-  // };
   ops: string[];
   listOrder: string;
 
@@ -62,7 +42,7 @@ export class BlogsListComponent {
     private appService: AppService,
     private router: Router,
     private blogsService: BlogsService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
   ) {
     this.appService.substract(20, 20);
     this.ops = this.appService.getOperations();
@@ -70,11 +50,11 @@ export class BlogsListComponent {
       this.listOrder = query.order;
       this.sortBlogList(this.listOrder);
     });
-    this.route.data.subscribe(data => console.log(data))
+    this.route.data.subscribe((data) => console.log(data));
   }
 
   ngOnInit(): void {
-    this.blogs = this.blogsService.getAll();
+    this.blogsService.getAll().subscribe(blogs => this.blogs = blogs);
     this.sortBlogList(this.listOrder);
   }
 
@@ -106,10 +86,6 @@ export class BlogsListComponent {
 
   addBlog() {
     console.log(this.blogAuthor, this.blogTitle, this.blogDesc);
-  }
-
-  addBlogReactive() {
-    console.log(this.reactiveBlog.value);
   }
 
   getOperations() {

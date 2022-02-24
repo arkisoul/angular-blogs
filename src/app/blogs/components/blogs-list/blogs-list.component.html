@@ -1,6 +1,9 @@
 <section class="blogs-list">
   <h1 class="title" title="blogs" [ngStyle]="titleStyle">{{ appname }}</h1>
   <!-- <input type="color" [(ngModel)]="titleColor"> -->
+  <div class="blogs-action">
+    <a routerLink="new" class="btn btn-new">Add New</a>
+  </div>
   <div class="blogs">
     <p *ngIf="blogs.length === 0; else blogList">No blogs available</p>
     <ng-template #blogList>
@@ -24,7 +27,7 @@
     <p *ngSwitchCase="'banana'">{{ fruit }} is a all season fruit.</p>
     <p *ngSwitchDefault>{{ fruit }} is not known.</p>
   </div> -->
-  <div class="blog-add">
+  <!-- <div class="blog-add">
     <form class="blog-form" (ngSubmit)="addBlog()">
       <div class="form-field">
         <label for="title" class="form-label">Enter a title</label
@@ -66,52 +69,6 @@
         <button type="submit" class="btn btn-submit">Submit</button>
       </div>
     </form>
-  </div>
-
-  <div class="blog-add">
-    <form class="blog-form" (ngSubmit)="addBlogReactive()" [formGroup]="reactiveBlog">
-      <div class="form-field">
-        <label for="title" class="form-label">Enter a title</label
-        ><div>
-          <input
-            type="text"
-            name="title"
-            id="title"
-            placeholder="Blog title here"
-            class="form-input"
-            formControlName="title"
-          />
-          <small class="form-error" *ngIf="!reactiveBlog.controls.title.pristine && reactiveBlog.controls.title.invalid">Title is required</small>
-        </div>
-      </div>
-      <div class="form-field">
-        <label for="author" class="form-label">Enter your name</label
-        ><input
-          type="text"
-          name="author"
-          id="author"
-          placeholder="Blog author name here"
-          class="form-input"
-          formControlName="author"
-        />
-        <small class="form-error" *ngIf="!reactiveBlog.controls.author.pristine && reactiveBlog.controls.author.invalid">Author is required</small>
-      </div>
-      <div class="form-field">
-        <label for="description" class="form-label">Enter description</label
-        ><textarea
-          name="description"
-          id="description"
-          cols="30"
-          rows="5"
-          class="form-input"
-          formControlName="desc"
-        ></textarea>
-        <small class="form-error" *ngIf="!reactiveBlog.controls.desc.pristine && reactiveBlog.controls.desc.invalid">Description is required</small>
-      </div>
-      <div class="form-field self-center">
-        <button type="submit" class="btn btn-submit" [disabled]="reactiveBlog.invalid">Submit</button>
-      </div>
-    </form>
-  </div>
-  <button (click)="getOperations()">Get Operations</button>
+  </div> -->
+  <!-- <button (click)="getOperations()">Get Operations</button> -->
 </section>

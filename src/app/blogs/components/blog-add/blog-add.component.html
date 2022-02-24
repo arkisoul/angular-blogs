@@ -1,0 +1,58 @@
+<div class="blog-add">
+  <h1 class="title">Add new blog</h1>
+  <form
+    class="blog-form"
+    (ngSubmit)="addNewBlog()"
+    [formGroup]="newBlogFormGroup"
+  >
+    <div class="form-field">
+      <label for="title" class="form-label">Enter a title</label>
+      <div style="width: 100%">
+        <input
+          type="text"
+          name="title"
+          id="title"
+          placeholder="Blog title here"
+          class="form-input"
+          formControlName="title"
+        />
+        <small
+          class="form-error"
+          *ngIf="
+            !newBlogFormGroup.controls.title.pristine &&
+            newBlogFormGroup.controls.title.invalid
+          "
+          >Title is required</small
+        >
+      </div>
+    </div>
+    <div class="form-field">
+      <label for="description" class="form-label">Enter description</label
+      ><textarea
+        name="description"
+        id="description"
+        cols="30"
+        rows="5"
+        class="form-input"
+        formControlName="body"
+      ></textarea>
+      <small
+        class="form-error"
+        *ngIf="
+          !newBlogFormGroup.controls.body.pristine &&
+          newBlogFormGroup.controls.body.invalid
+        "
+        >Description is required</small
+      >
+    </div>
+    <div class="form-field self-center">
+      <button
+        type="submit"
+        class="btn btn-submit"
+        [disabled]="newBlogFormGroup.invalid"
+      >
+        Submit
+      </button>
+    </div>
+  </form>
+</div>

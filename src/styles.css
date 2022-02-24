@@ -34,3 +34,34 @@ i.fas::before, i.far::before, i.fa::before {
     font-size: 0.75rem;
     margin: 1em 0;
 }
+.btn {
+    all: unset;
+    padding: 0.75em 1.5em;
+    cursor: pointer;
+}
+.btn-submit {
+    background-color: white;
+    color: black;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.25);
+}
+.btn-new {
+    background-color: bisque;
+    color: #333;
+}
+.form-field {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+}
+.form-label {
+    font-size: 0.8rem;
+    flex: 0 0 150px;
+}
+.form-input {
+    padding: 0.5em 1em;
+    width: 100%;
+    font-size: 1rem;
+}
+.self-center {
+    justify-self: center;
+}

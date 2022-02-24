@@ -1,9 +1,12 @@
+export type TNewBlog = {
+  title: string;
+  body: string;
+  userId: number;
+}
+
 export interface IBlog {
   id: number;
   title: string;
-  description: string;
-  isNew: boolean;
-  publishedAt: Date;
-  modifiedAt: Date;
-  author: string;
+  body: string;
+  userId: number;
 }
