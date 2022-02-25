@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { FormBuilder, FormControl } from '@angular/forms';
 
 import { IBlog } from '../../interfaces/blog.interface';
 import { AppService } from '../../../app.service';
@@ -14,6 +15,7 @@ export class BlogsListComponent {
   appname: string = 'Blogs';
 
   blogs: IBlog[] = [];
+  filteredBlogs: IBlog[] = [];
   fruit: string = 'mango';
   fruitMango: string = 'mango';
   titleColor: string = '#ff0000';
@@ -37,12 +39,14 @@ export class BlogsListComponent {
 
   ops: string[];
   listOrder: string;
+  searchField: FormControl;
 
   constructor(
     private appService: AppService,
     private router: Router,
     private blogsService: BlogsService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private fb: FormBuilder
   ) {
     this.appService.substract(20, 20);
     this.ops = this.appService.getOperations();
@@ -51,11 +55,17 @@ export class BlogsListComponent {
       this.sortBlogList(this.listOrder);
     });
     this.route.data.subscribe((data) => console.log(data));
+    this.searchField = this.fb.control('');
   }
 
   ngOnInit(): void {
-    this.blogsService.getAll().subscribe((blogs) => (this.blogs = blogs));
+    this.blogsService
+      .getAll()
+      .subscribe((blogs) => (this.filteredBlogs = this.blogs = blogs));
     this.sortBlogList(this.listOrder);
+    this.searchField.valueChanges.subscribe((value: string) => {
+      this.filteredBlogs = this.blogs.filter(blog => blog.title.startsWith(value))
+    });
   }
 
   sortBlogList(order: string = 'asc') {

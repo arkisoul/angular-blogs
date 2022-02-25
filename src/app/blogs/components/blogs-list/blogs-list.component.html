@@ -2,13 +2,19 @@
   <h1 class="title" title="blogs" [ngStyle]="titleStyle">{{ appname }}</h1>
   <!-- <input type="color" [(ngModel)]="titleColor"> -->
   <div class="blogs-action">
+    <div>
+      <form action="">
+        <input type="search" placeholder="Search using title" [formControl]="searchField">
+        <input type="submit" value="Search">
+      </form>
+    </div>
     <a routerLink="new" class="btn btn-new">Add New</a>
   </div>
   <div class="blogs">
     <p *ngIf="blogs.length === 0; else blogList">No blogs available</p>
     <ng-template #blogList>
       <app-blog
-        *ngFor="let blog of blogs"
+        *ngFor="let blog of filteredBlogs"
         [blogData]="blog"
         [blogLength]="blogs.length"
         [app]="appname"

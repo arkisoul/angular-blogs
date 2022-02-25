@@ -31,5 +31,7 @@
 .blogs-action {
     display: flex;
     justify-content: flex-end;
+    align-items: center;
     margin-bottom: 1em;
+    gap: 1em;
 }

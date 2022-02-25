@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators, FormGroup } from '@angular/forms';
+import {
+  FormControl,
+  Validators,
+  FormGroup,
+  FormBuilder,
+} from '@angular/forms';
 import { BlogsService } from '../../services/blogs.service';
 
 @Component({
@@ -11,7 +16,7 @@ export class BlogAddComponent implements OnInit {
   // reactive blog add form
   newBlogFormGroup: FormGroup;
 
-  constructor(private blogsService: BlogsService) {
+  constructor(private blogsService: BlogsService, private fb: FormBuilder) {
     this.createNewBlogFormGroup();
   }
 
@@ -27,6 +32,21 @@ export class BlogAddComponent implements OnInit {
       userId: new FormControl(this.generateUserId(), Validators.required),
       body: new FormControl('', Validators.required),
     });
+
+
+    const blogFormGroup = this.fb.group({
+      title: ['', [
+        Validators.required,
+        Validators.minLength(10),
+        Validators.maxLength(30),
+      ]],
+      userId: [this.generateUserId(), Validators.required],
+      body: ['', Validators.required],
+      rate: this.fb.group({
+        rating: ['', Validators.required],
+        count: ['']
+      })
+    });
   }
 
   generateUserId(): number {
@@ -34,12 +54,14 @@ export class BlogAddComponent implements OnInit {
   }
 
   addNewBlog() {
-    if(this.newBlogFormGroup.invalid) {
+    if (this.newBlogFormGroup.invalid) {
       alert('Invalid input values');
       return;
     }
-    
-    this.blogsService.add(this.newBlogFormGroup.value).subscribe(blog => console.log(blog));
+
+    this.blogsService
+      .add(this.newBlogFormGroup.value)
+      .subscribe((blog) => console.log(blog));
     this.newBlogFormGroup.reset();
   }
 }
