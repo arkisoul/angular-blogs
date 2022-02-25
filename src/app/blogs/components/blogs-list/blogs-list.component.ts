@@ -1,17 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormControl } from '@angular/forms';
+import { debounceTime } from 'rxjs/operators';
 
 import { IBlog } from '../../interfaces/blog.interface';
 import { AppService } from '../../../app.service';
 import { BlogsService } from '../../services/blogs.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-blogs-list',
   templateUrl: './blogs-list.component.html',
   styleUrls: ['./blogs-list.component.css'],
 })
-export class BlogsListComponent {
+export class BlogsListComponent implements OnInit, OnDestroy {
   appname: string = 'Blogs';
 
   blogs: IBlog[] = [];
@@ -40,6 +42,8 @@ export class BlogsListComponent {
   ops: string[];
   listOrder: string;
   searchField: FormControl;
+  getAllSub: Subscription;
+  searchFieldSub: Subscription;
 
   constructor(
     private appService: AppService,
@@ -59,13 +63,19 @@ export class BlogsListComponent {
   }
 
   ngOnInit(): void {
-    this.blogsService
+    this.getAllSub = this.blogsService
       .getAll()
       .subscribe((blogs) => (this.filteredBlogs = this.blogs = blogs));
     this.sortBlogList(this.listOrder);
-    this.searchField.valueChanges.subscribe((value: string) => {
+    this.searchFieldSub = this.searchField.valueChanges.pipe(debounceTime(1000)).subscribe((value: string) => {
+      console.log(value)
       this.filteredBlogs = this.blogs.filter(blog => blog.title.startsWith(value))
     });
+  }
+
+  ngOnDestroy(): void {
+    this.getAllSub.unsubscribe();
+    this.searchFieldSub.unsubscribe();
   }
 
   sortBlogList(order: string = 'asc') {
