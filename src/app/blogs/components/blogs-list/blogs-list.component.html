@@ -10,6 +10,9 @@
     </div>
     <a routerLink="new" class="btn btn-new">Add New</a>
   </div>
+  <ul>
+      <li *ngFor="let op of ops">{{op}}</li>
+    </ul>
   <div class="blogs">
     <p *ngIf="blogs.length === 0; else blogList">No blogs available</p>
     <ng-template #blogList>

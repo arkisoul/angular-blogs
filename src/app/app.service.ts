@@ -1,25 +1,31 @@
 import { Injectable } from '@angular/core';
 
+import { Subject, BehaviorSubject } from 'rxjs';
+
 @Injectable({
   providedIn: 'root',
 })
 export class AppService {
   name = 'calc';
-  private operations: string[] = [];
+  private operations: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
 
   constructor() {}
 
   add(a: number, b: number) {
-    this.operations.push('add');
+    const value = this.operations.getValue();
+    value.push('add')
+    this.operations.next(value)
     return a + b;
   }
 
   substract(a: number, b: number) {
-    this.operations.push('substract');
+    const value = this.operations.getValue();
+    value.push('substract');
+    this.operations.next(value);
     return Math.abs(a - b);
   }
 
   getOperations() {
-    return [...this.operations];
+    return this.operations.asObservable();
   }
 }

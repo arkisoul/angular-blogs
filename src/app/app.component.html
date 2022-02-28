@@ -14,6 +14,9 @@
     <div class="big-font">{{ flag ? "Flag is true" : "Flag is false" }}</div>
     <input type="text" [name]="inputField" placeholder="Write some text" [(ngModel)]="title" >
     <div><button (click)="handleSubmit(title)">Toggle Flag!</button></div> -->
+    <ul>
+      <li *ngFor="let op of ops">{{op}}</li>
+    </ul>
   </div>
 </header>
 <main class="main-content">

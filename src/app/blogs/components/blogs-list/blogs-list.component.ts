@@ -53,7 +53,9 @@ export class BlogsListComponent implements OnInit, OnDestroy {
     private fb: FormBuilder
   ) {
     this.appService.substract(20, 20);
-    this.ops = this.appService.getOperations();
+    this.appService.getOperations().subscribe(value => {
+      this.ops = value;
+    })
     this.route.queryParams.subscribe((query) => {
       this.listOrder = query.order;
       this.sortBlogList(this.listOrder);
@@ -111,8 +113,10 @@ export class BlogsListComponent implements OnInit, OnDestroy {
   }
 
   getOperations() {
-    const operations = this.appService.getOperations();
-    console.log(operations);
+    this.appService.getOperations().subscribe(values => {
+      const operations = values;
+      console.log(operations);
+    });
   }
 
   showBlogDetails(blogId: number) {

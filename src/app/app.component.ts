@@ -1,5 +1,5 @@
 import { Component, VERSION } from '@angular/core';
-import { Observable, Subscriber } from 'rxjs';
+import { Observable, Subscriber, Subject } from 'rxjs';
 
 import { AppService } from './app.service';
 
@@ -16,11 +16,14 @@ export class AppComponent {
   ops: string[];
   observable: Observable<string>;
   subscriber: Subscriber<string>;
+  subject: Subject<string>;
 
   constructor(private appService: AppService) {
+    this.appService.getOperations().subscribe(value => {
+      this.ops = value;
+    });
     this.appService.add(10, 20);
     this.appService.substract(30, 20);
-    this.ops = this.appService.getOperations();
     this.observable = new Observable(sub => {
       this.subscriber = sub;
       sub.next('First')
@@ -32,19 +35,25 @@ export class AppComponent {
       }, 1000)
       sub.next('Sixth')
     });
+    this.subject = new Subject();
   }
-
+  
   ngOnInit(): void {
     console.log('AppComp ngOnInit');
     this.observable.subscribe((value) =>
-      console.log('S1:: ', value)
+    console.log('S1:: ', value)
     );
+    this.observable.subscribe((value) =>
+    console.log('S2:: ', value)
+    );
+    this.subject.subscribe(value => console.log('Sub-S1:: ', value))
+    this.subject.next('Sub-First')
+    this.subject.subscribe(value => console.log('Sub-S2:: ', value))
+    this.subject.next('Sub-Second')
+    this.subject.next('Sub-Third')
   }
 
   pushAValue() {
-    this.observable.subscribe((value) =>
-      console.log('S2:: ', value)
-    );
     // const authors = ['John Doe', 'jane doe', 'john smith'];
     // this.subscriber.next(authors[Math.floor(Math.random() * 3)]);
   }
@@ -68,7 +77,8 @@ export class AppComponent {
   }
 
   getOperations() {
-    const operations = this.appService.getOperations();
-    console.log('AppComp ', operations);
+    this.appService.getOperations().subscribe(value => {
+      console.log('app comp ', value)
+    });
   }
 }
