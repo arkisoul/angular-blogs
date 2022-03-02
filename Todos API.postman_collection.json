@@ -1,0 +1,459 @@
+{
+	"info": {
+		"_postman_id": "213ba065-2d07-4bf4-8041-c82de1bd527e",
+		"name": "Todos API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get All",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/todos",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"todos"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get All",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/todos",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"todos"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "246"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"f6-aUv69qsv+lnI/QoQ/3WmsnZ8aFA\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 17 Jan 2022 11:18:41 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"message\": \"Todo list\",\n    \"data\": [\n        {\n            \"_id\": \"61e5508453320a9fdb0c6c70\",\n            \"title\": \"Create todoapi\",\n            \"isCompleted\": false,\n            \"createdAt\": \"2022-01-17T11:18:28.731Z\",\n            \"updatedAt\": \"2022-01-17T11:18:28.731Z\",\n            \"__v\": 0\n        }\n    ],\n    \"error\": null,\n    \"resource\": \"/todos\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Get By Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/todos/:todoId",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"todos",
+						":todoId"
+					],
+					"variable": [
+						{
+							"key": "todoId",
+							"value": "61e5508453320a9fdb0c6c70"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get By Id",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/todos/:todoId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"todos",
+								":todoId"
+							],
+							"variable": [
+								{
+									"key": "todoId",
+									"value": "61e5508453320a9fdb0c6c70"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "272"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"110-eFILN1XWZ1RpFaVnsmLGUbx6EDM\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 17 Jan 2022 11:19:42 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"message\": \"Todo details\",\n    \"data\": {\n        \"_id\": \"61e5508453320a9fdb0c6c70\",\n        \"title\": \"Create todoapi\",\n        \"isCompleted\": false,\n        \"createdAt\": \"2022-01-17T11:18:28.731Z\",\n        \"updatedAt\": \"2022-01-17T11:18:28.731Z\",\n        \"__v\": 0\n    },\n    \"error\": null,\n    \"resource\": \"/todos/61e5508453320a9fdb0c6c70\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Create todoapi\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/todos",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"todos"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Create",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Create todoapi\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/todos",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"todos"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "247"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"f7-IDLQpVCQ38VvWgPwM1dIn+kCxkY\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 17 Jan 2022 11:18:28 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"message\": \"Todo created\",\n    \"data\": {\n        \"title\": \"Create todoapi\",\n        \"isCompleted\": false,\n        \"_id\": \"61e5508453320a9fdb0c6c70\",\n        \"createdAt\": \"2022-01-17T11:18:28.731Z\",\n        \"updatedAt\": \"2022-01-17T11:18:28.731Z\",\n        \"__v\": 0\n    },\n    \"error\": null,\n    \"resource\": \"/todos\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Edit",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Creating todoapi\",\n    \"isCompleted\": true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/todos/:todoId",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"todos",
+						":todoId"
+					],
+					"variable": [
+						{
+							"key": "todoId",
+							"value": "61e5508453320a9fdb0c6c70"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Edit",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Creating todoapi\",\n    \"isCompleted\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/todos/:todoId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"todos",
+								":todoId"
+							],
+							"variable": [
+								{
+									"key": "todoId",
+									"value": "61e5508453320a9fdb0c6c70"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "273"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"111-phTL4Ebp/3v4XkRlUic6NhIQUzs\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 17 Jan 2022 11:20:29 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"message\": \"Todo updated\",\n    \"error\": null,\n    \"data\": {\n        \"_id\": \"61e5508453320a9fdb0c6c70\",\n        \"title\": \"Creating todoapi\",\n        \"isCompleted\": true,\n        \"createdAt\": \"2022-01-17T11:18:28.731Z\",\n        \"updatedAt\": \"2022-01-17T11:20:29.714Z\",\n        \"__v\": 0\n    },\n    \"resource\": \"/todos/61e5508453320a9fdb0c6c70\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/todos/:todoId",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"todos",
+						":todoId"
+					],
+					"variable": [
+						{
+							"key": "todoId",
+							"value": "61e5508453320a9fdb0c6c70"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Delete",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/todos/:todoId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"todos",
+								":todoId"
+							],
+							"variable": [
+								{
+									"key": "todoId",
+									"value": "61e5508453320a9fdb0c6c70"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "111"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"6f-INpBK60PwCVWNa3VOd6eNkWPXJc\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 17 Jan 2022 11:21:02 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"message\": \"Todo deleted\",\n    \"data\": null,\n    \"error\": null,\n    \"resource\": \"/todos/61e5508453320a9fdb0c6c70\"\n}"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "localhost:3000",
+			"type": "string"
+		}
+	]
+}
