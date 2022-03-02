@@ -1,0 +1,29 @@
+Todoapp Prototype
+1. Create a fresh angular application using angular cli. Use version 10
+2. Auth Module
+    - Login Component
+        - Username/Email and Password
+    - Register Component
+        - Name, Username/Email, Password
+    - Auth routing module
+    /auth/login
+    /auth/register
+    - Auth Service
+        - login POST Body -> raw -> JSON
+        - register POST Body -> raw -> JSON
+
+3. Todo Module
+    - Structure of a Todo item
+        _id: string
+        title: string
+        isCompleted: boolean
+        createdAt: Date,
+        updatedAt: Date
+    - Components
+        - Todos
+            - TodoHeader
+                - A text Field to get the title of a todo. When we press enter. Create a new todo with input value. (title is required);
+            - TodoList
+                - TodoItem
+            - TodoFooter
+    - Todo Routing Module
