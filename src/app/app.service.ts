@@ -26,6 +26,6 @@ export class AppService {
   }
 
   getOperations() {
-    return this.operations.asObservable();
+    return this.operations;
   }
 }
