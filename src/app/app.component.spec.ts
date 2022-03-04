@@ -40,7 +40,7 @@ describe('AppComponent', () => {
   it(`should have as flag true on handleSubmit call`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    app.handleSubmit('test');
+    app.handleSubmit();
     expect(app.flag).toBeTrue();
   });
 

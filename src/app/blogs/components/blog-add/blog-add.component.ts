@@ -1,10 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormControl,
-  Validators,
-  FormGroup,
-  FormBuilder,
-} from '@angular/forms';
+import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { BlogsService } from '../../services/blogs.service';
 
 @Component({
@@ -23,29 +18,17 @@ export class BlogAddComponent implements OnInit {
   ngOnInit(): void {}
 
   createNewBlogFormGroup() {
-    this.newBlogFormGroup = new FormGroup({
-      title: new FormControl('', [
-        Validators.required,
-        Validators.minLength(10),
-        Validators.maxLength(30),
-      ]),
-      userId: new FormControl(this.generateUserId(), Validators.required),
-      body: new FormControl('', Validators.required),
-    });
-
-
-    const blogFormGroup = this.fb.group({
-      title: ['', [
-        Validators.required,
-        Validators.minLength(10),
-        Validators.maxLength(30),
-      ]],
+    this.newBlogFormGroup = this.fb.group({
+      title: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(10),
+          Validators.maxLength(30),
+        ],
+      ],
       userId: [this.generateUserId(), Validators.required],
       body: ['', Validators.required],
-      rate: this.fb.group({
-        rating: ['', Validators.required],
-        count: ['']
-      })
     });
   }
 
