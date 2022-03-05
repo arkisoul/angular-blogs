@@ -51,8 +51,7 @@ export class BlogEditComponent implements OnInit {
       return;
     }
 
-    this.blogsService.edit(this.newBlogFormGroup.value).subscribe((blog) => {
-      console.log(blog);
+    this.blogsService.edit(this.newBlogFormGroup.value).subscribe(() => {
       this.router.navigate(['/blogs'])
     });
     this.newBlogFormGroup.reset();

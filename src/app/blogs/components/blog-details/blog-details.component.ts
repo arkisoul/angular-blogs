@@ -21,8 +21,5 @@ export class BlogDetailsComponent implements OnInit {
       const blogId = parseInt(params.blogId);
       this.blogsService.getBlogById(blogId).subscribe(blog => this.blog = blog);
     });
-    this.route.queryParams.subscribe((query) => {
-      console.log(query)
-    })
   }
 }

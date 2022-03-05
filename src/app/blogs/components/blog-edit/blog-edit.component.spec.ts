@@ -1,4 +1,7 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { BlogEditComponent } from './blog-edit.component';
 
@@ -8,7 +11,8 @@ describe('BlogEditComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ BlogEditComponent ]
+      declarations: [ BlogEditComponent ],
+      imports: [HttpClientTestingModule, RouterTestingModule, ReactiveFormsModule, FormsModule]
     })
     .compileComponents();
   });
@@ -19,7 +23,7 @@ describe('BlogEditComponent', () => {
     fixture.detectChanges();
   });
 
-  // it('should create', () => {
-  //   expect(component).toBeTruthy();
-  // });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 });
