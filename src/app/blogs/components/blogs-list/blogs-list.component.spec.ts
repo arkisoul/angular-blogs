@@ -185,4 +185,12 @@ describe('BlogsListComponent', () => {
     tick(1000);
     expect(location.path()).toContain('/blogs/1');
   }));
+  
+  it(`should call blogService delete api on onDeleteBlog call`, fakeAsync(() => {
+    const service = fixture.debugElement.injector.get(BlogsService);
+    const spyOnDelete = spyOn(service, 'delete').and.returnValue(of({}));
+    component.onDeleteBlog(1);
+    expect(spyOnDelete).toHaveBeenCalledTimes(1);
+    expect(spyOnDelete).toHaveBeenCalledWith(1);
+  }));
 });

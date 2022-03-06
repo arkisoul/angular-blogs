@@ -47,7 +47,6 @@ export class BlogEditComponent implements OnInit {
 
   updateBlog() {
     if (this.newBlogFormGroup.invalid) {
-      alert('Invalid input values');
       return;
     }
 
