@@ -19,6 +19,9 @@ export class BlogEditComponent implements OnInit {
     private router: Router
   ) {
     this.createUpdateBlogFormGroup();
+  }
+  
+  ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.blogsService.getBlogById(params.blogId).subscribe((blog) => {
         this.blog = blog;
@@ -29,8 +32,6 @@ export class BlogEditComponent implements OnInit {
       });
     });
   }
-
-  ngOnInit(): void {}
 
   createUpdateBlogFormGroup() {
     this.newBlogFormGroup = new FormGroup({

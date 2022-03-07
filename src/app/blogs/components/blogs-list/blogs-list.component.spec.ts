@@ -173,17 +173,21 @@ describe('BlogsListComponent', () => {
   }));
 
   it(`should navigate to '/blogs/:blogId/edit' on onEditBlog call`, fakeAsync(() => {
-    const location: Location = TestBed.inject(Location);
-    component.onEditBlog(1);
-    tick(1000);
-    expect(location.path()).toEqual('/blogs/1/edit');
+    fixture.ngZone.run(() => {
+      const location: Location = TestBed.inject(Location);
+      component.onEditBlog(1);
+      tick(1000);
+      expect(location.path()).toEqual('/blogs/1/edit');
+    })
   }));
   
   it(`should navigate to '/blogs/:blogId' on onShowDetails call`, fakeAsync(() => {
-    const location: Location = TestBed.inject(Location);
-    component.showBlogDetails(1);
-    tick(1000);
-    expect(location.path()).toContain('/blogs/1');
+    fixture.ngZone.run(() => {
+      const location: Location = TestBed.inject(Location);
+      component.showBlogDetails(1);
+      tick(1000);
+      expect(location.path()).toContain('/blogs/1');
+    })
   }));
   
   it(`should call blogService delete api on onDeleteBlog call`, fakeAsync(() => {

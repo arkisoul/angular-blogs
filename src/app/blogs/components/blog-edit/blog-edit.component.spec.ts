@@ -7,8 +7,10 @@ import {
 } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
+import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
+import { delay } from 'rxjs/operators';
 import { IBlog } from '../../interfaces/blog.interface';
 import { BlogsService } from '../../services/blogs.service';
 import { BlogsListComponent } from '../blogs-list/blogs-list.component';
@@ -29,6 +31,12 @@ describe('BlogEditComponent', () => {
         ]),
         ReactiveFormsModule,
         FormsModule,
+      ],
+      providers: [
+        {
+          provide: ActivatedRoute,
+          useValue: { params: of({ blogId: 1 }).pipe(delay(1)) },
+        },
       ],
     }).compileComponents();
   });
@@ -111,14 +119,16 @@ describe('BlogEditComponent', () => {
         userId: 2,
       })
     );
-    component.updateBlog();
-    tick(1000);
-    expect(serviceAddSpy).toHaveBeenCalled();
-    expect(serviceAddSpy).toHaveBeenCalledWith({
-      id: 1,
-      title: 'Blog title',
-      body: 'Blog body',
-      userId: 2,
+    fixture.ngZone.run(() => {
+      component.updateBlog();
+      tick(1000);
+      expect(serviceAddSpy).toHaveBeenCalled();
+      expect(serviceAddSpy).toHaveBeenCalledWith({
+        id: 1,
+        title: 'Blog title',
+        body: 'Blog body',
+        userId: 2,
+      });
     });
   }));
 
@@ -131,10 +141,23 @@ describe('BlogEditComponent', () => {
     const spyOnGetDetails = spyOn(service, 'getBlogById')
       .withArgs(1)
       .and.returnValue(
-        of({ id: 1, title: 'Blog title', body: 'Blog description', userId: 1 })
+        of({
+          id: 1,
+          title: 'Blog title',
+          body: 'Blog description',
+          userId: 1,
+        }).pipe(delay(1))
       );
-    tick(1000);
+    component.ngOnInit();
+    tick(2);
     expect(spyOnGetDetails).toHaveBeenCalled();
     expect(component.newBlogFormGroup.controls.id.value).toEqual(1);
+    expect(component.newBlogFormGroup.controls.title.value).toEqual(
+      'Blog title'
+    );
+    expect(component.newBlogFormGroup.controls.body.value).toEqual(
+      'Blog description'
+    );
+    expect(component.newBlogFormGroup.controls.userId.value).toEqual(1);
   }));
 });
