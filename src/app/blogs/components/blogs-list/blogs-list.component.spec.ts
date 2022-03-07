@@ -10,6 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
+import { delay } from 'rxjs/operators';
 
 import { BlogsService } from '../../services/blogs.service';
 import { BlogDetailsComponent } from '../blog-details/blog-details.component';
@@ -192,9 +193,57 @@ describe('BlogsListComponent', () => {
   
   it(`should call blogService delete api on onDeleteBlog call`, fakeAsync(() => {
     const service = fixture.debugElement.injector.get(BlogsService);
-    const spyOnDelete = spyOn(service, 'delete').and.returnValue(of({}));
+    const spyOnDelete = spyOn(service, 'delete').and.returnValue(of({}).pipe(delay(1)));
+    component.blogs = [
+      { id: 1, title: 'Blog 1', body: 'Blog body', userId: 1 },
+      { id: 2, title: 'Blog 2', body: 'Blog body', userId: 2 },
+    ];
     component.onDeleteBlog(1);
+    tick(1)
     expect(spyOnDelete).toHaveBeenCalledTimes(1);
     expect(spyOnDelete).toHaveBeenCalledWith(1);
+    expect(component.blogs).toEqual([
+      { id: 2, title: 'Blog 2', body: 'Blog body', userId: 2 },
+    ]);
   }));
+  
+  it(`should filter blogs based on search keyword`, fakeAsync(() => {
+    component.blogs = [
+      { id: 1, title: 'Blog 1', body: 'Blog body', userId: 1 },
+      { id: 2, title: 'Blog 2', body: 'Blog body', userId: 2 },
+    ];
+    component.searchField.setValue('Blog 1');
+    tick(1000)
+    expect(component.filteredBlogs).toEqual([
+      { id: 1, title: 'Blog 1', body: 'Blog body', userId: 1 },
+    ]);
+  }));
+  
+  it(`should sort blogs in asc order`, () => {
+    component.blogs = [
+      { id: 2, title: 'Blog 2', body: 'Blog body', userId: 1 },
+      { id: 1, title: 'Blog 1', body: 'Blog body', userId: 2 },
+      { id: 3, title: 'Blog 3', body: 'Blog body', userId: 1 },
+    ];
+    component.sortBlogList();
+    expect(component.filteredBlogs).toEqual([
+      { id: 1, title: 'Blog 1', body: 'Blog body', userId: 2 },
+      { id: 2, title: 'Blog 2', body: 'Blog body', userId: 1 },
+      { id: 3, title: 'Blog 3', body: 'Blog body', userId: 1 },
+    ]);
+  });
+  
+  it(`should sort blogs in desc order`, () => {
+    component.blogs = [
+      { id: 2, title: 'Blog 2', body: 'Blog body', userId: 1 },
+      { id: 1, title: 'Blog 1', body: 'Blog body', userId: 2 },
+      { id: 3, title: 'Blog 3', body: 'Blog body', userId: 1 },
+    ];
+    component.sortBlogList('desc');
+    expect(component.filteredBlogs).toEqual([
+      { id: 3, title: 'Blog 3', body: 'Blog body', userId: 1 },
+      { id: 2, title: 'Blog 2', body: 'Blog body', userId: 1 },
+      { id: 1, title: 'Blog 1', body: 'Blog body', userId: 2 },
+    ]);
+  });
 });

@@ -66,9 +66,8 @@ export class BlogsListComponent implements OnInit, OnDestroy {
   }
 
   sortBlogList(order: string = 'asc') {
-    this.blogs = [...this.blogs].sort((a, b) => {
+    this.filteredBlogs = [...this.blogs].sort((a, b) => {
       if (a.id < b.id) return order === 'asc' ? -1 : 1;
-      if (a.id === b.id) return 0;
       return order === 'asc' ? 1 : -1;
     });
   }
